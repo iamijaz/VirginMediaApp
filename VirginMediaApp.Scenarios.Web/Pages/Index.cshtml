@@ -1,0 +1,71 @@
+﻿@page
+@model VirginMediaApp.Scenarios.Web.Pages.PageModels.IndexPageModel
+
+<div class="container">
+    <h1 class="mt-4 mb-3">
+        Scenarios:
+    </h1>
+    <hr/>
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-success">@Model.Message</div>
+    }
+
+    <div id="Scenarioscontainer" class="row">
+        <div class="col-md-8 mb-4">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].ScenarioId)</th>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].Surname)</th>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].Forename)</th>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].UserId)</th>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].SampleDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].CreationDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].NumMonths)</th>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].MarketId)</th>
+                    <th>@Html.DisplayNameFor(model => model.Scenarios[0].NetworkLayerId)</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Scenarios)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ScenarioId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Surname)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Forename)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.SampleDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CreationDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NumMonths)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MarketId)</td>
+                        <td>@Html.DisplayFor(modelItem => item.NetworkLayerId)</td>
+
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+            @{
+                var prevDisabled = Model.Scenarios.HasPreviousPage ? "" : "disabled";
+                var nextDisabled = Model.Scenarios.HasNextPage ? "" : "disabled";
+            }
+
+            <a asp-page="./Index"
+               asp-route-pageIndex="@(Model.Scenarios.PageIndex - 1)"
+               asp-route-currentFilter="@Model.CurrentFilter"
+               class="btn btn-primary @prevDisabled">
+                Previous
+            </a>
+            <a asp-page="./Index"
+               asp-route-pageIndex="@(Model.Scenarios.PageIndex + 1)"
+               asp-route-currentFilter="@Model.CurrentFilter"
+               class="btn btn-primary @nextDisabled">
+                Next
+            </a>
+        </div>
+    </div>
+</div>
